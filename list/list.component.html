@@ -1,0 +1,18 @@
+<div>
+
+    <div>
+        <button (click)="clear()" class="btn btn-danger">Очистить хранилище</button>
+    </div>
+
+    <div class="card"  *ngFor="let text of list">
+        <h5 class="card-header">ID: {{text.key}}</h5>
+        <div class="card-body">
+            <!--<h5 class="card-title">Special title treatment</h5>-->
+            <p class="card-text">{{text.inputText}}</p>
+            <hr>
+            <p class="card-text">{{text.outputText}}</p>
+            <a href="#" class="btn btn-danger" (click)="remove(r.id)" #r [id]=text.key>Удалить</a>
+        </div>
+    </div>
+
+</div>
