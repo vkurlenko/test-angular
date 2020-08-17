@@ -4,6 +4,7 @@ export interface Text {
     key: string;
     inputText: string;
     outputText: string;
+    targetLang: string;
 }
 
 @Component({
@@ -21,6 +22,7 @@ export class ListComponent implements OnInit {
     this.fill();
   }
 
+  // вывод списка текстов
   fill() {
       this.list = [];
 
@@ -32,18 +34,21 @@ export class ListComponent implements OnInit {
           this.list.push({
               key: key,
               inputText: obj.inputText,
-              outputText: obj.outputText
+              outputText: obj.outputText,
+              targetLang: obj.targetLang
           });
 
           console.log(this.list);
       }
   }
 
+  // удаление всех текстов
   clear() {
       localStorage.clear();
       this.fill();
   }
 
+  // удаление текста по ID
   remove(id) {
       localStorage.removeItem(id);
       this.fill();
