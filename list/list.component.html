@@ -1,6 +1,7 @@
 <div>
 
     <div>
+        <button (click)="fill()" class="btn btn-primary">Обновить список</button>
         <button (click)="clear()" class="btn btn-danger">Очистить хранилище</button>
     </div>
 
@@ -8,8 +9,10 @@
         <h5 class="card-header">ID: {{text.key}}</h5>
         <div class="card-body">
             <!--<h5 class="card-title">Special title treatment</h5>-->
+            <small class="form-text text-muted">Исходный текст</small>
             <p class="card-text">{{text.inputText}}</p>
             <hr>
+            <small class="form-text text-muted">Перевод</small>
             <p class="card-text">{{text.outputText}}</p>
             <a href="#" class="btn btn-danger" (click)="remove(r.id)" #r [id]=text.key>Удалить</a>
         </div>
