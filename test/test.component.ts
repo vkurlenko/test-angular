@@ -1,40 +1,83 @@
 import { Component, OnInit } from '@angular/core';
-//import {timestamp} from "rxjs/internal/operators";
+import {HttpClient} from "@angular/common/http";
+import {createConsoleLogger} from "@angular-devkit/core/node";
+import {Text} from "../list/list.component";
 
+
+export interface Language {
+    key: string;
+}
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
+
 export class TestComponent implements OnInit {
 
-  constructor() { }
+    url = "https://translation.googleapis.com/language/translate/v2?key=AIzaSyC_P6j4rudEjbVnG-pLPggZPkULDAyMHAo";
+    inputText = 'Text for translate';
+    outputText = '';
+    targetLang = 'ru';
+    languages: Language[] = [];
 
-  inputText = 'Text for translate';
-  translateText = '';
 
-  ngOnInit(): void {
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  inputHandler(value) {
+    ngOnInit(): void {
+        this.getLanguages();
+    }
+
+    inputHandler(value) {
       this.inputText = value;
-  }
+    }
 
-  translate() {
-    //console.log(this.inputText);
-    this.translateText = this.inputText;
-  }
+    selectTargetLang(value) {
+        this.targetLang = value;
+    }
 
-  save() {
+    // перевод текста
+    translate() {
+        this.outputText = this.inputText;
+
+        let body = {
+              q: this.inputText,
+              target: this.targetLang,
+        };
+
+        this.http.post(this.url, body).toPromise().then(result => {
+          this.outputText = result['data']['translations'][0]['translatedText'];
+        });
+    }
+
+    // получить все доступные для перевода языки
+    getLanguages() {
+        let url = 'https://translation.googleapis.com/language/translate/v2/languages?key=AIzaSyC_P6j4rudEjbVnG-pLPggZPkULDAyMHAo';
+
+        this.http.post(url, {}).toPromise().then(result => {
+
+            for(let i = 0; i < result['data']['languages'].length; i++) {
+
+                this.languages.push({
+                    key: result['data']['languages'][i]['language']
+                });
+            }
+        });
+    }
+
+    // сохранение перевода в localStorage
+    save() {
       let date = new Date();
       let _key = date.getTime().toString();
 
       let obj = {
           inputText: this.inputText,
-          outputText: this.translateText
+          outputText: this.outputText,
+          targetLang: this.targetLang
       };
 
       localStorage.setItem(_key, JSON.stringify(obj));
-  }
+    }
 
 }
