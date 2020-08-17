@@ -3,7 +3,15 @@
             <div class="form-group">
                 <label for="">Исходный текст</label>
                 <textarea class="form-control" #myInput (input)="inputHandler(myInput.value)" rows="10">{{ inputText }}</textarea>
-                <small class="form-text text-muted">Текст для перевода</small>
+                <!--<small class="form-text text-muted">Текст для перевода</small>-->
+            </div>
+
+            <div class="form-group">
+                <label for="">Целевой язык</label>
+                <select class="form-control" id="" #selectTarget (change)="selectTargetLang(selectTarget.value)">
+                    <option>Выберите целевой язык</option>
+                    <option *ngFor="let lang of languages" [value]=lang.key>{{lang.key}}</option>
+                </select>
             </div>
 
             <div class="form-btn-translate">
@@ -12,8 +20,8 @@
 
             <div class="form-group">
                 <label for="">Перевод</label>
-                <textarea class="form-control" rows="10">{{ translateText }}</textarea>
-                <small class="form-text text-muted">Текст перевода</small>
+                <textarea class="form-control" rows="10">{{ outputText }}</textarea>
+                <!--<small class="form-text text-muted">Текст перевода</small>-->
             </div>
 
             <div class="form-btn-save">
