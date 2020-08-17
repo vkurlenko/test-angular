@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {timestamp} from "rxjs/internal/operators";
+//import {timestamp} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-test',
@@ -36,6 +36,5 @@ export class TestComponent implements OnInit {
 
       localStorage.setItem(_key, JSON.stringify(obj));
   }
-
 
 }

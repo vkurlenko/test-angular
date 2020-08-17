@@ -48,9 +48,4 @@ export class ListComponent implements OnInit {
       localStorage.removeItem(id);
       this.fill();
   }
-
-
-
-
-
 }
