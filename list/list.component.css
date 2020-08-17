@@ -1,15 +1,6 @@
 .card{
     margin: 20px 0;
 }
-.card-header a {
-    float: right;
-
-}
-.card-body p {
-    max-height: 200px;
-    overflow-y: auto;
-    font-size: 12px;
-}
 
 button {
     margin-right: 10px;
